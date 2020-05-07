@@ -19,7 +19,7 @@ jobs:
         # uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: yarn install
+        - run: yarn install
 
       - name: Run migrations
-      - run: yarn sequelize db:migrate
+        - run: yarn sequelize db:migrate
