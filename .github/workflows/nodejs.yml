@@ -9,17 +9,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [12.x]
 
     steps:
       - uses: actions/checkout@v2
       - name: Yarn install packages
-        # uses: actions/setup-node@v1
+        uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node-version }}
-        - run: yarn install
-
-      - name: Run migrations
-        - run: yarn sequelize db:migrate
+          node-version: 12.x
+      - run: yarn install
+      - run: yarn sequelize db:migrate
