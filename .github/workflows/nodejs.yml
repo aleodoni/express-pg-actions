@@ -42,3 +42,7 @@ jobs:
           DB_PASS: postgres
           DB_NAME: postgres
           DB_PORT: 5432
+
+    - name: Run tests
+      run: yarn test
+
