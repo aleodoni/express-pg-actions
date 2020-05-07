@@ -21,7 +21,6 @@ jobs:
         run: yarn sequelize db:migrate
 
       - name: Check for failures
-          run: exit 1
 
 
 
