@@ -21,6 +21,7 @@ jobs:
         run: yarn sequelize db:migrate
 
       - name: Check for failures
+        uses: actions/setup-node@v1
         run: echo 'OLA'
 
 
