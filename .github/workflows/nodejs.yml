@@ -1,16 +1,22 @@
 name: ci
 
-on: [push]
+on: push:
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v1
-      - name: Yarn install packages
-        uses: actions/setup-node@v1
-        with:
-          node-version: 12.x
-      - run: yarn install
-      - run: yarn sequelize db:migrate
-      - run: exit 1
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Setup Node
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+
+    - name: Install dependencies
+      run: yarn
+
+    - name: Run migrations
+      run: yarn sequelize db:migrate
