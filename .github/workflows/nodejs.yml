@@ -6,6 +6,19 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    container: node:10.18-jessie
+
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: postgres
+        options:
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -20,3 +33,9 @@ jobs:
 
     - name: Run migrations
       run: yarn sequelize db:migrate
+      env:
+          DB_HOST: postgres
+          DB_USER: postgres
+          DB_PASS: postgres
+          DB_NAME: postgres
+          DB_PORT: 5432
