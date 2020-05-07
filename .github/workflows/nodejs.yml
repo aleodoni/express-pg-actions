@@ -1,24 +1,41 @@
-# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+name: ci
 
-name: Node.js CI
-
-on:
-  push:
+on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [12.x]
+    container: node:10.18-jessie
+
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: postgres
+        options:
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Setup Node
       uses: actions/setup-node@v1
       with:
-        node-version: ${{ matrix.node-version }}
-    - run: yarn
+        node-version: 12.x
+
+    - name: Install dependencies
+      run: yarn
+
+    - name: Run migrations
+      run: yarn sequelize db:migrate
+      env:
+          DB_HOST: postgres
+          DB_USER: postgres
+          DB_PASS: postgres
+          DB_NAME: postgres
+          DB_PORT: 5432
