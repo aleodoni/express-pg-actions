@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: 'actions/checkout@v1'
       - name: Yarn install packages
-        id: yarn
+        id: hello
         uses: actions/setup-node@v1
         with:
           node-version: 12.x
@@ -21,7 +21,6 @@ jobs:
         run: yarn sequelize db:migrate
 
       - name: Check for failures
-          if: steps.yarn.outputs.status != 'success'
           run: exit 1
 
 
