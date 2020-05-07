@@ -1,5 +1,5 @@
 Arguments: 
-  /home/daniele/.nvm/versions/node/v12.14.0/bin/node /usr/share/yarn/bin/yarn.js add @types/youch -D
+  /home/daniele/.nvm/versions/node/v12.14.0/bin/node /usr/share/yarn/bin/yarn.js dev
 
 PATH: 
   /home/daniele/.nvm/versions/node/v12.14.0/bin:/usr/local/lib/node//bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/jvm/java-14-oracle/bin:/usr/lib/jvm/java-14-oracle/db/bin:/home/daniele/Android/Sdk/tools:/home/daniele/Android/Sdk/platform-tools
@@ -14,17 +14,12 @@ Platform:
   linux x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@types%2fyouch: Not found
-      at Request.params.callback [as _callback] (/usr/share/yarn/lib/cli.js:66926:18)
-      at Request.self.callback (/usr/share/yarn/lib/cli.js:140564:22)
-      at Request.emit (events.js:210:5)
-      at Request.<anonymous> (/usr/share/yarn/lib/cli.js:141536:10)
-      at Request.emit (events.js:210:5)
-      at IncomingMessage.<anonymous> (/usr/share/yarn/lib/cli.js:141458:12)
-      at Object.onceWrapper (events.js:299:28)
-      at IncomingMessage.emit (events.js:215:7)
-      at endReadableNT (_stream_readable.js:1184:12)
-      at processTicksAndRejections (internal/process/task_queues.js:80:21)
+  SyntaxError: /home/daniele/dev/novo-teste/package.json: Unexpected token } in JSON at position 195
+      at JSON.parse (<anonymous>)
+      at /usr/share/yarn/lib/cli.js:1625:59
+      at Generator.next (<anonymous>)
+      at step (/usr/share/yarn/lib/cli.js:304:30)
+      at /usr/share/yarn/lib/cli.js:315:13
 
 npm manifest: 
   {
@@ -33,7 +28,8 @@ npm manifest:
     "main": "index.js",
     "license": "MIT",
     "scripts": {
-      "dev": "nodemon src/server.js"
+      "dev": "nodemon src/server.js",
+      "migrate": "yarn sequelize db:migrate",
     },
     "devDependencies": {
       "eslint": "^6.8.0",
