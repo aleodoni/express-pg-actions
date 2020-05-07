@@ -19,8 +19,6 @@ jobs:
         run: yarn install
         run: yarn sequelize db:migrate
 
-      - name: Check for failures
-        run: echo 'OLA'
 
 
 
